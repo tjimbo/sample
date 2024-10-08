@@ -1,0 +1,31 @@
+services:
+#  app:
+#    image: sampleapp:latest
+#    networks:
+#      - app_nw
+#    ports:
+#      - "8080:80"
+#    environment:
+#        SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/sampledb
+#        SPRING_DATASOURCE_USERNAME: postgres
+#        SPRING_DATASOURCE_PASSWORD: postgres
+  database:
+    image: postgres:latest
+    container_name: sample-database
+    networks:
+      - app_nw
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: sampledb
+      POSTGRES_PASSWORD: postgres
+    healthcheck:
+      test: [ "CMD-SHELL", "sh -c 'pg_isready -U postgres -d postgres'" ]
+      start_period: 10s
+      interval: 10s
+      timeout: 0s
+      retries: 5
+    ports:
+      - "5433:5432"
+networks:
+  app_nw:
+    driver: bridge

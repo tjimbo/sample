@@ -1,0 +1,60 @@
+@import "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+	scrollbar-gutter: stable;
+}
+
+body:has(dialog[open]) {
+	overflow: hidden;
+}
+
+@layer utilities {
+	.status-base {
+		@apply flex w-fit items-center rounded px-2;
+	}
+
+	.status-travelling {
+		@apply status-base bg-green-500 text-white;
+	}
+
+	.status-upcoming {
+		@apply status-base bg-green-500/pressed text-green-500;
+	}
+
+	.status-disabled {
+		@apply status-base bg-lightgray text-secondary;
+	}
+}
+
+::-webkit-scrollbar {
+	@apply w-2;
+}
+
+::-webkit-scrollbar-track {
+	@apply rounded bg-gray-50;
+}
+
+::-webkit-scrollbar-thumb {
+	@apply rounded bg-gray-200;
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+	display: none;
+}
+
+input[type="time"]::-webkit-clear-button {
+	display: none;
+}
+
+.no-scrollbar {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+	display: none;
+}
